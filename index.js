@@ -118,10 +118,10 @@ Alipay.prototype.request = function (params, cb) {
     request({
         url: ALIPAY_GATEWAY,
         method: 'POST',
-		encoding: null,
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-		},
+        encoding: null,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=gb2312'
+        },
         form: params
     }, function (err, response, body) {
         if (err) {
