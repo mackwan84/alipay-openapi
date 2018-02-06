@@ -107,7 +107,7 @@ Alipay.prototype.request = function (params, cb) {
     params = _.extend({
         app_id: self._options.app_id,
         format: 'JSON',
-        charset: 'gb2312',
+        charset: self._options.charset || 'utf8',
         sign_type: self._options.sign_type || 'RSA',
         timestamp: moment().format('YYYY-MM-DD HH:mm:ss'),
         version: '1.0'
@@ -120,14 +120,14 @@ Alipay.prototype.request = function (params, cb) {
         method: 'POST',
         encoding: null,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=gb2312'
+            'Content-Type': 'application/x-www-form-urlencoded; charset=' + (self._options.charset || 'utf8')
         },
         form: params
     }, function (err, response, body) {
         if (err) {
             cb(err)
         } else {
-            var data = JSON.parse(iconv.decode(body, 'gb2312'));
+            var data = JSON.parse(iconv.decode(body, (self._options.charset || 'utf8')));
             if (data.error_response) {
                 cb(new Error(data.error_response.msg));
             } else {
